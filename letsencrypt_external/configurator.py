@@ -129,7 +129,7 @@ class ExternalConfigurator(common.Plugin):
                 continue
 
             if self.call_handler("cleanup", domain=achall.domain) is None:
-                raise errors.PluginError("post-cleanup handler failed")
+                raise errors.PluginError("cleanup handler failed")
 
         if self.call_handler("post-cleanup") is None:
             raise errors.PluginError("post-cleanup handler failed")
