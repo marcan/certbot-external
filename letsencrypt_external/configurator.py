@@ -7,7 +7,6 @@ import zope.interface
 
 from acme import challenges
 
-from letsencrypt import achallenges
 from letsencrypt import errors
 from letsencrypt import interfaces
 from letsencrypt import reverter
@@ -57,7 +56,7 @@ class ExternalConfigurator(common.Plugin):
         :rtype: list
 
         """
-        return [challenges.DVSNI]
+        return [challenges.TLSSNI01]
 
     def perform(self, achalls):
         """Perform the given challenge.
@@ -91,9 +90,6 @@ class ExternalConfigurator(common.Plugin):
             raise errors.PluginError("pre-perform handler failed")
 
         for i, achall in enumerate(achalls):
-            if not isinstance(achall, achallenges.DVSNI):
-                responses.append(False)
-                continue
             responses.append(None)
 
             external_dvsni.add_chall(achall, i)
@@ -125,9 +121,6 @@ class ExternalConfigurator(common.Plugin):
             raise errors.PluginError("pre-cleanup handler failed")
 
         for i, achall in enumerate(achalls):
-            if not isinstance(achall, achallenges.DVSNI):
-                continue
-
             if self.call_handler("cleanup", domain=achall.domain) is None:
                 raise errors.PluginError("cleanup handler failed")
 

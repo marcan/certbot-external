@@ -7,14 +7,14 @@ from letsencrypt.plugins import common
 logger = logging.getLogger(__name__)
 
 
-class ExternalDvsni(common.Dvsni):
+class ExternalDvsni(common.TLSSNI01):
     """Class performs DVSNI challenges within the External configurator.
 
     :ivar configurator: ExternalConfigurator object
     :type configurator: :class:`~configurator.ExternalConfigurator`
 
-    :ivar list achalls: Annotated :class:`~letsencrypt.achallenges.DVSNI`
-        challenges.
+    :ivar list achalls: Annotated tls-sni-01
+        (`.KeyAuthorizationAnnotatedChallenge`) challenges.
 
     :param list indices: Meant to hold indices of challenges in a
         larger array. ExternalDvsni is capable of solving many challenges
@@ -44,10 +44,10 @@ class ExternalDvsni(common.Dvsni):
         for achall in self.achalls:
             ret = self.configurator.call_handler("perform",
                 domain = achall.domain,
-                z_domain = achall.gen_response(achall.account_key).z_domain,
+                z_domain = achall.response(achall.account_key).z_domain,
                 cert_path = self.get_cert_path(achall),
                 key_path = self.get_key_path(achall),
-                port = str(self.configurator.config.dvsni_port)
+                port = str(self.configurator.config.tls_sni_01_port)
             )
 
             if ret in (None, NotImplemented):
