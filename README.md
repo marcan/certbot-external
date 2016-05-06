@@ -20,16 +20,14 @@ then:
 
 To use, try something like this:
 
-    # letsencrypt --agree-tos --agree-dev-preview \
-        -a letsencrypt-external:external \
+    # certbot --agree-tos --agree-dev-preview \
+        -a certbot-external:external \
         -d example.com certonly
 
 This plugin only supports authentication, not installation, since it is assumed
 that the administrator will install the certificate manually. It can be used
 with the renewer too, but you'll have to wrap it with a script that checks
 whether any certificates were renewed and restarts the appropriate server(s) if
-needed. Or you could have `external-handler.sh` leave a flag when a domain is
-authenticated, and then if the flag is present after letsencrypt-renewer runs,
-reload your server configs.
+needed.
 
 Loosely based on the Let's Encrypt nginx plugin.
