@@ -7,14 +7,14 @@ import zope.interface
 
 from acme import challenges
 
-from letsencrypt import errors
-from letsencrypt import interfaces
-from letsencrypt import reverter
+from certbot import errors
+from certbot import interfaces
+from certbot import reverter
 
-from letsencrypt.plugins import common
+from certbot.plugins import common
 
-from letsencrypt_external import constants
-from letsencrypt_external import dvsni
+from certbot_external import constants
+from certbot_external import dvsni
 
 logger = logging.getLogger(__name__)
 
@@ -62,7 +62,7 @@ class ExternalConfigurator(common.Plugin):
         """Perform the given challenge.
 
         :param list achalls: Non-empty (guaranteed) list of
-            :class:`~letsencrypt.achallenges.AnnotatedChallenge`
+            :class:`~certbot.achallenges.AnnotatedChallenge`
             instances, such that it contains types found within
             :func:`get_chall_pref` only.
 
@@ -111,7 +111,7 @@ class ExternalConfigurator(common.Plugin):
         """Revert changes and shutdown after challenges complete.
 
         :param list achalls: Non-empty (guaranteed) list of
-            :class:`~letsencrypt.achallenges.AnnotatedChallenge`
+            :class:`~certbot.achallenges.AnnotatedChallenge`
             instances, a subset of those previously passed to :func:`perform`.
 
         :raises PluginError: if original configuration cannot be restored

@@ -1,8 +1,8 @@
 """ExternalDVSNI"""
 import logging
 
-from letsencrypt import errors
-from letsencrypt.plugins import common
+from certbot import errors
+from certbot.plugins import common
 
 logger = logging.getLogger(__name__)
 
@@ -31,7 +31,7 @@ class ExternalDvsni(common.TLSSNI01):
     def perform(self):
         """Perform a DVSNI challenge using an external script.
 
-        :returns: list of :class:`letsencrypt.acme.challenges.DVSNIResponse`
+        :returns: list of :class:`certbot.acme.challenges.DVSNIResponse`
         :rtype: list
 
         """
