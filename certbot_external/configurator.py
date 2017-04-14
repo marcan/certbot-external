@@ -19,11 +19,10 @@ from certbot_external import dvsni
 logger = logging.getLogger(__name__)
 
 
+@zope.interface.implementer(interfaces.IAuthenticator, interfaces.IInstaller)
+@zope.interface.provider(interfaces.IPluginFactory)
 class ExternalConfigurator(common.Plugin):
     """External configurator."""
-    zope.interface.implements(interfaces.IAuthenticator)
-    zope.interface.classProvides(interfaces.IPluginFactory)
-
     description = "Configuration via external shell script"
 
     @classmethod
@@ -142,7 +141,8 @@ class ExternalConfigurator(common.Plugin):
         proc = subprocess.Popen([self.conf('handler'), command] + list(args),
                                 stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE,
-                                env=env)
+                                env=env,
+				universal_newlines=True)
         stdout, stderr = proc.communicate()
 
         if proc.returncode != 0:
