@@ -17,6 +17,7 @@ then:
 
     # python setup.py install
     # cp external-handler.sh.example /etc/letsencrypt/external-handler.sh
+    # chmod +x /etc/letsencrypt/external-handler.sh
 
 To use, try something like this:
 
