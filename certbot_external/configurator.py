@@ -18,11 +18,10 @@ from certbot_external import dvsni
 
 logger = logging.getLogger(__name__)
 
-
+@zope.interface.implementer(interfaces.IAuthenticator)
+@zope.interface.provider(interfaces.IPluginFactory)
 class ExternalConfigurator(common.Plugin):
     """External configurator."""
-    zope.interface.implements(interfaces.IAuthenticator)
-    zope.interface.classProvides(interfaces.IPluginFactory)
 
     description = "Configuration via external shell script"
 
