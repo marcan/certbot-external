@@ -1,3 +1,13 @@
+# OBSOLETE
+
+With the [removal of TLS-SNI validation](https://community.letsencrypt.org/t/2018-01-11-update-regarding-acme-tls-sni-and-shared-hosting-infrastructure/50188),
+this plugin is obsolete. If you just need basic renewal hook support, you can
+use the [built-in hook options](https://certbot.eff.org/docs/using.html#pre-and-post-validation-hooks)
+present in recent versions of certbot. If you need more features, consider
+[EnigmaBridge/certbot-external-auth](https://github.com/EnigmaBridge/certbot-external-auth)
+in handler mode, which is inspired by this plug-in but also supports HTTP-01
+and DNS-01 validation.
+
 ## External shell script plugin for Let's Encrypt client
 
 This plugin allows you to use a custom shell script to implement DVSNI
